@@ -16,11 +16,9 @@ class Item
      * @param $quantity
      * @throws \Exception
      */
-    public function __construct(Product $product, int $quantity)
+    public function __construct(Product $product)
     {
         $this->product = $product;
-        $this->checkIfQuantityIsProper($quantity);
-        $this->quantity = $quantity;
     }
 
     /**
@@ -38,21 +36,51 @@ class Item
     }
 
     /**
+     * @return int
+     */
+    public function getQuantity()
+    {
+        return $this->quantity;
+    }
+
+    /**
      * @param $quantity
+     * @return $this
+     * @throws \Exception
+     */
+    public function setQuantity($quantity)
+    {
+        $this->checkIfQuantityIsProper($quantity);
+        $this->quantity = $quantity;
+        return $this;
+    }
+
+    /**
+     * @return \DealerGroup\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
+    }
+
+    /**
+     * @param \DealerGroup\Entity\Product $product
+     * @return $this
+     */
+    public function setProduct(Product $product)
+    {
+        $this->product = $product;
+        return $this;
+    }
+
+    /**
+     * @param int $quantity
      * @throws \Exception
      */
     private function checkIfQuantityIsProper(int $quantity)
     {
         if ($quantity < $this->product->getMinimumQuantity()) {
-            throw new \Exception('Minimum quantity is 1.'); // should be OutOfBoundException
+            throw new \Exception('Minimum quantity is ' . $this->product->getMinimumQuantity());
         }
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getQuantity()
-    {
-        return $this->quantity;
     }
 }

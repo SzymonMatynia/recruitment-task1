@@ -15,7 +15,7 @@ class Cart
      * @return $this
      * @throws \Exception
      */
-    public function addItem(Item $item)
+    public function addItem(Item $item, $quantity)
     {
         for ($i = 0; $i < sizeof($this->cart); $i++) {
             if ($this->cart[$i] === $item) {
@@ -23,8 +23,18 @@ class Cart
                 return $this;
             }
         }
+        $item->setQuantity($quantity);
         $this->cart[] = $item;
         return $this;
+    }
+
+    public function removeItem(Item $item)
+    {
+        for ($i = 0; $i < sizeof($this->cart); $i++) {
+            if ($this->cart[$i] === $item) {
+                unset($this->cart[$i]);
+            }
+        }
     }
 
     /**
@@ -32,6 +42,9 @@ class Cart
      */
     public function getCart()
     {
-        return $this->cart[0];
+        for ($i = 0; $i < sizeof($this->cart); $i++) {
+            $this->totalPrice += $this->cart[$i]->getProduct()->getUnitPrice() * $this->cart[$i]->getQuantity();
+        }
+        return $this->totalPrice;
     }
 }

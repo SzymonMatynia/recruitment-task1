@@ -6,20 +6,18 @@ namespace DealerGroup\Entity;
 class Product
 {
     private $name;
-    private $price;
+    private $unitPrice;
     private $minimumQuantity = 1;
 
     /**
      * Product constructor.
      * @param $name
-     * @param $price
-     * @param int $minimumQuantity
+     * @param $unitPrice
      */
-    public function __construct($name, $price, $minimumQuantity = 1)
+    public function __construct($name, $unitPrice)
     {
         $this->name = $name;
-        $this->price = $price;
-        $this->minimumQuantity = $minimumQuantity;
+        $this->unitPrice = $unitPrice;
     }
 
     /**
@@ -41,17 +39,17 @@ class Product
     /**
      * @return mixed
      */
-    public function getPrice()
+    public function getUnitPrice()
     {
-        return $this->price;
+        return $this->unitPrice;
     }
 
     /**
-     * @param mixed $price
+     * @param $unitPrice
      */
-    public function setPrice($price): void
+    public function setUnitPrice($unitPrice): void
     {
-        $this->price = $price;
+        $this->unitPrice = $unitPrice;
     }
 
     /**
@@ -64,9 +62,24 @@ class Product
 
     /**
      * @param int $minimumQuantity
+     * @return Product
+     * @throws \Exception
      */
-    public function setMinimumQuantity(int $minimumQuantity): void
+    public function setMinimumQuantity(int $minimumQuantity): Product
     {
+        $this->checkIfProperMinimumQuantitySupplied($minimumQuantity);
         $this->minimumQuantity = $minimumQuantity;
+        return $this;
+    }
+
+    /**
+     * @param $minimumQuantity
+     * @throws \Exception
+     */
+    private function checkIfProperMinimumQuantitySupplied($minimumQuantity)
+    {
+        if ($minimumQuantity < 1) {
+            throw new \Exception('Quantity can not be less than 1. Yours is equal to: ' . $minimumQuantity);
+        }
     }
 }
