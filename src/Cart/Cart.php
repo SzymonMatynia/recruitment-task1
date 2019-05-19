@@ -5,6 +5,7 @@ namespace DealerGroup\Cart;
 
 use DealerGroup\Entity\Item;
 use DealerGroup\Entity\Product;
+use phpDocumentor\Reflection\Types\Array_;
 
 class Cart
 {
@@ -17,7 +18,7 @@ class Cart
      * @return $this
      * @throws \Exception
      */
-    public function addItem(Product $product, $quantity = null)
+    public function addItem(Product $product, int $quantity = null)
     {
         if ($quantity === null) {
             $quantity = $product->getMinimumQuantity();
@@ -52,15 +53,15 @@ class Cart
     public function getCart()
     {
         for ($i = 0; $i < sizeof($this->items); $i++) {
-            intval($this->totalPrice += ($this->items[$i]
+            $this->totalPrice += $this->items[$i]
                         ->getProduct()
-                        ->getUnitPrice() * $this->items[$i]->getQuantity()) / 100);
+                        ->getUnitPrice() * $this->items[$i]->getQuantity();
         }
-        return $this->totalPrice;
+        return $this->totalPrice / 100;
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getItems()
     {
@@ -68,13 +69,9 @@ class Cart
     }
 
     /**
-     * @return mixed
+     * @param Product $product
+     * @return bool
      */
-    public function getTotalPrice()
-    {
-        return $this->totalPrice;
-    }
-
     private function checkIfExists(Product $product)
     {
         for ($i = 0; $i < sizeof($this->items); $i++) {
@@ -85,6 +82,10 @@ class Cart
         return false;
     }
 
+    /**
+     * @param Product $product
+     * @return int
+     */
     public function getProductIndex(Product $product)
     {
         for ($i = 0; $i < sizeof($this->items); $i++) {

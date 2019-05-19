@@ -45,7 +45,15 @@ class CartTest extends TestCase
         $this->assertNotContains($cart->getItems(), [$product]);
     }
 
-    private function buildProduct(int $id, string $name, int $unitPrice)
+    /*public function testIt()
+    {
+        $product = $this->buildProduct(1, 'test', 1899);
+        $cart = new Cart();
+        $cart->addItem($product);
+        var_dump($cart->getCart() + $cart->getCart());
+    }*/
+
+    private function buildProduct($id, string $name, int $unitPrice)
     {
         return (new Product())->setId($id)->setName($name)->setUnitPrice($unitPrice);
     }

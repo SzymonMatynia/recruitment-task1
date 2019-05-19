@@ -33,10 +33,10 @@ class Product
     }
 
     /**
-     * @param $id
+     * @param int $id
      * @return Product
      */
-    public function setId($id): Product
+    public function setId(int $id): Product
     {
         $this->id = $id;
         return $this;
@@ -51,28 +51,28 @@ class Product
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return Product
      */
-    public function setName($name): Product
+    public function setName(string $name): Product
     {
         $this->name = $name;
         return $this;
     }
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getUnitPrice()
+    public function getUnitPrice(): int
     {
         return $this->unitPrice;
     }
 
     /**
-     * @param $unitPrice
+     * @param int $unitPrice
      * @return Product
      */
-    public function setUnitPrice($unitPrice): Product
+    public function setUnitPrice(int $unitPrice): Product
     {
         $this->checkIfProperUnitPriceSupplied($unitPrice);
         $this->unitPrice = $unitPrice;
@@ -103,7 +103,7 @@ class Product
      * @param $minimumQuantity
      * @throws \Exception
      */
-    private function checkIfProperMinimumQuantitySupplied($minimumQuantity)
+    private function checkIfProperMinimumQuantitySupplied($minimumQuantity): void
     {
         if ($minimumQuantity < 1) {
             throw new InvalidMinimumQuantityException('Quantity can not be less than 1. Yours: ' . $minimumQuantity);
@@ -111,9 +111,9 @@ class Product
     }
 
     /**
-     * @param $unitPrice
+     * @param int $unitPrice
      */
-    private function checkIfProperUnitPriceSupplied($unitPrice)
+    private function checkIfProperUnitPriceSupplied(int $unitPrice): void
     {
         if ($unitPrice < 0) {
             throw new InvalidUnitPriceException('Unit price shouldn\'t be less than 0, don\'t you think?');

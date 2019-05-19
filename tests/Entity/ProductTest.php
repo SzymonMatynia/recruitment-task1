@@ -17,13 +17,13 @@ class ProductTest extends TestCase
         $product->setMinimumQuantity(-1);
     }
 
-    public function testIfUnitPriceCanBeLessThanZero()
+    public function testIfUnitPriceCantBeLessThanZero()
     {
         $this->expectException(InvalidUnitPriceException::class);
         $product = $this->buildProduct(1, "testUnitPrice", -5555);
     }
 
-    private function buildProduct(int $id, string $name, int $unitPrice)
+    private function buildProduct($id, string $name, int $unitPrice)
     {
         return (new Product())->setId($id)->setName($name)->setUnitPrice($unitPrice);
     }
