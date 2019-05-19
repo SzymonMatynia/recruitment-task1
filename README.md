@@ -21,7 +21,7 @@ Stwórz prosty, obiektowy mechanizm koszyka zakupowego wraz z testami jednostkow
 
 
 Pilnuj formatowania zgodnego z PSR-2, aby zaakceptował je PHP Code Sniffer.
-Koszyk powinien operować na groszach, aby uniknąć błędów operacji zmiennoprzecinkowych.
+Koszyk powinien operować na groszach, aby uniknąć błędów operacji zmiennoprzecinkowych.git 
 W pliku composer.json znajdują się potrzebne zależności oraz skonfigurowany autoloading PSR-4
 
 Aby uprościć zadanie, nie przejmuj się przechowywaniem koszyka w sesji ani w bazie danych.

@@ -3,8 +3,12 @@
 
 namespace DealerGroup\Entity;
 
+use DealerGroup\Entity\Exception\InvalidMinimumQuantityException;
+use DealerGroup\Entity\Exception\InvalidUnitPriceException;
+
 class Product
 {
+    private $id;
     private $name;
     private $unitPrice;
     private $minimumQuantity = 1;
@@ -14,10 +18,28 @@ class Product
      * @param $name
      * @param $unitPrice
      */
-    public function __construct($name, $unitPrice)
+    /*public function __construct($id, $name, $unitPrice)
     {
         $this->name = $name;
         $this->unitPrice = $unitPrice;
+    }*/
+
+    /**
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param $id
+     * @return Product
+     */
+    public function setId($id): Product
+    {
+        $this->id = $id;
+        return $this;
     }
 
     /**
@@ -29,11 +51,13 @@ class Product
     }
 
     /**
-     * @param mixed $name
+     * @param $name
+     * @return Product
      */
-    public function setName($name): void
+    public function setName($name): Product
     {
         $this->name = $name;
+        return $this;
     }
 
     /**
@@ -46,10 +70,13 @@ class Product
 
     /**
      * @param $unitPrice
+     * @return Product
      */
-    public function setUnitPrice($unitPrice): void
+    public function setUnitPrice($unitPrice): Product
     {
+        $this->checkIfProperUnitPriceSupplied($unitPrice);
         $this->unitPrice = $unitPrice;
+        return $this;
     }
 
     /**
@@ -79,7 +106,17 @@ class Product
     private function checkIfProperMinimumQuantitySupplied($minimumQuantity)
     {
         if ($minimumQuantity < 1) {
-            throw new \Exception('Quantity can not be less than 1. Yours is equal to: ' . $minimumQuantity);
+            throw new InvalidMinimumQuantityException('Quantity can not be less than 1. Yours: ' . $minimumQuantity);
+        }
+    }
+
+    /**
+     * @param $unitPrice
+     */
+    private function checkIfProperUnitPriceSupplied($unitPrice)
+    {
+        if ($unitPrice < 0) {
+            throw new InvalidUnitPriceException('Unit price shouldn\'t be less than 0, don\'t you think?');
         }
     }
 }

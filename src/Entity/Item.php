@@ -3,6 +3,7 @@
 
 namespace DealerGroup\Entity;
 
+use DealerGroup\Entity\Exception\InvalidItemQuantityException;
 use DealerGroup\Entity\Product;
 
 class Item
@@ -75,12 +76,11 @@ class Item
 
     /**
      * @param int $quantity
-     * @throws \Exception
      */
     private function checkIfQuantityIsProper(int $quantity)
     {
         if ($quantity < $this->product->getMinimumQuantity()) {
-            throw new \Exception('Minimum quantity is ' . $this->product->getMinimumQuantity());
+            throw new InvalidItemQuantityException('Minimum quantity is ' . $this->product->getMinimumQuantity());
         }
     }
 }
