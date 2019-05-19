@@ -14,12 +14,13 @@ class Item
     /**
      * Item constructor.
      * @param \DealerGroup\Entity\Product $product
-     * @param $quantity
+     * @param int $quantity
      * @throws \Exception
      */
-    public function __construct(Product $product)
+    public function __construct(Product $product, int $quantity)
     {
         $this->product = $product;
+        $this->setQuantity($quantity);
     }
 
     /**
@@ -30,9 +31,7 @@ class Item
     public function changeItemQuantity($requestedQuantity)
     {
         $this->checkIfQuantityIsProper($requestedQuantity);
-
         $this->quantity = $requestedQuantity;
-
         return $this;
     }
 
@@ -62,16 +61,6 @@ class Item
     public function getProduct()
     {
         return $this->product;
-    }
-
-    /**
-     * @param \DealerGroup\Entity\Product $product
-     * @return $this
-     */
-    public function setProduct(Product $product)
-    {
-        $this->product = $product;
-        return $this;
     }
 
     /**

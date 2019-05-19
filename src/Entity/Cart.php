@@ -25,7 +25,7 @@ class Cart
             $presentQuantity = $this->items[$index]->getQuantity();
             $this->items[$index]->setQuantity($quantity + $presentQuantity);
         } else {
-            $this->items[] = (new Item($product))->setQuantity($quantity);
+            $this->items[] = new Item($product, $quantity);
         }
         return $this;
     }
