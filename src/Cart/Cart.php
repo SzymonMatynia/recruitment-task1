@@ -5,7 +5,6 @@ namespace DealerGroup\Cart;
 
 use DealerGroup\Entity\Item;
 use DealerGroup\Entity\Product;
-use phpDocumentor\Reflection\Types\Array_;
 
 class Cart
 {
