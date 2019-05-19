@@ -14,17 +14,6 @@ class Product
     private $minimumQuantity = 1;
 
     /**
-     * Product constructor.
-     * @param $name
-     * @param $unitPrice
-     */
-    /*public function __construct($id, $name, $unitPrice)
-    {
-        $this->name = $name;
-        $this->unitPrice = $unitPrice;
-    }*/
-
-    /**
      * @return mixed
      */
     public function getId()

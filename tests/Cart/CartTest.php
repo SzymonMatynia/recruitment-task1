@@ -3,7 +3,7 @@
 
 namespace DealerGroup\Tests\Cart;
 
-use DealerGroup\Cart\Cart;
+use DealerGroup\Entity\Cart;
 use DealerGroup\Entity\Product;
 use PHPUnit\Framework\TestCase;
 
@@ -39,9 +39,7 @@ class CartTest extends TestCase
         $product = $this->buildProduct(1, 'test', 185186);
         $product2 = $this->buildProduct(2, 'test2', 133);
         $cart = new Cart();
-        $cart->addItem($product, 50);
-        $cart->addItem($product2, 50);
-        $cart->removeItem($product);
+        $cart->addItem($product, 50)->addItem($product2, 50)->removeItem($product);
         $this->assertNotContains($cart->getItems(), [$product]);
     }
 

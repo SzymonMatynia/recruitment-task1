@@ -1,10 +1,7 @@
 <?php
 
 
-namespace DealerGroup\Cart;
-
-use DealerGroup\Entity\Item;
-use DealerGroup\Entity\Product;
+namespace DealerGroup\Entity;
 
 class Cart
 {
@@ -24,8 +21,9 @@ class Cart
         }
 
         if ($this->checkIfExists($product)) {
-            $presentQuantity = $this->items[$this->getProductIndex($product)]->getQuantity();
-            $this->items[$this->getProductIndex($product)]->setQuantity($quantity + $presentQuantity);
+            $index = $this->getProductIndex($product);
+            $presentQuantity = $this->items[$index]->getQuantity();
+            $this->items[$index]->setQuantity($quantity + $presentQuantity);
         } else {
             $this->items[] = (new Item($product))->setQuantity($quantity);
         }
@@ -39,7 +37,8 @@ class Cart
     public function removeItem(Product $product)
     {
         if ($this->checkIfExists($product)) {
-            unset($this->items[$this->getProductIndex($product)]);
+            $index = $this->getProductIndex($product);
+            unset($this->items[$index]);
             $this->items = array_values($this->items);
         }
         return $this;
@@ -49,12 +48,10 @@ class Cart
     /**
      * @return mixed
      */
-    public function getCart()
+    public function getTotalPrice()
     {
         for ($i = 0; $i < sizeof($this->items); $i++) {
-            $this->totalPrice += $this->items[$i]
-                        ->getProduct()
-                        ->getUnitPrice() * $this->items[$i]->getQuantity();
+            $this->totalPrice += $this->items[$i]->getProduct()->getUnitPrice() * $this->items[$i]->getQuantity();
         }
         return $this->totalPrice / 100;
     }
