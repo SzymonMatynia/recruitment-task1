@@ -26,18 +26,21 @@ class Cart
         if ($this->checkIfExists($product)) {
             $presentQuantity = $this->items[$this->getProductIndex($product)]->getQuantity();
             $this->items[$this->getProductIndex($product)]->setQuantity($quantity + $presentQuantity);
-            return $this;
         } else {
             $this->items[] = (new Item($product))->setQuantity($quantity);
-            return $this;
         }
+        return $this;
     }
 
+    /**
+     * @param Product $product
+     * @return $this
+     */
     public function removeItem(Product $product)
     {
         if ($this->checkIfExists($product)) {
             unset($this->items[$this->getProductIndex($product)]);
-            $this->items[] = array_values($this->items);
+            $this->items = array_values($this->items);
         }
         return $this;
     }
@@ -61,7 +64,7 @@ class Cart
      */
     public function getItems()
     {
-        return $this;
+        return $this->items;
     }
 
     /**
