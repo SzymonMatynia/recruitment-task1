@@ -10,6 +10,8 @@ use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
 {
+    use BuildProductTrait;
+
     public function testIfMinimumQuantityCanBeLessThanDefinedOne()
     {
         $product = $this->buildProduct(1, "testProduct", 5555);
@@ -21,10 +23,5 @@ class ProductTest extends TestCase
     {
         $this->expectException(InvalidUnitPriceException::class);
         $product = $this->buildProduct(1, "testUnitPrice", -5555);
-    }
-
-    private function buildProduct($id, string $name, int $unitPrice)
-    {
-        return (new Product())->setId($id)->setName($name)->setUnitPrice($unitPrice);
     }
 }

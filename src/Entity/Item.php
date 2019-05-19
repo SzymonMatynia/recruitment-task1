@@ -4,7 +4,6 @@
 namespace DealerGroup\Entity;
 
 use DealerGroup\Entity\Exception\InvalidItemQuantityException;
-use DealerGroup\Entity\Product;
 
 class Item
 {

@@ -9,12 +9,22 @@ use PHPUnit\Framework\TestCase;
 
 class CartTest extends TestCase
 {
-    public function testAddProductIfOk()
+    use BuildProductTrait;
+
+    public function testAddProductWhenIsCorrect()
     {
         $product = $this->buildProduct(1, 'test', 5555);
         $cart = new Cart();
         $cart->addItem($product, 15);
         $this->assertSame($cart->getItems()[$cart->getProductIndex($product)]->getProduct(), $product);
+    }
+
+    public function testAddProductWhenIsNotCorrect()
+    {
+        $this->expectException(\TypeError::class);
+        $product = 5;
+        $cart = new Cart();
+        $cart->addItem($product, 15);
     }
 
     public function testIfSameProductsAddQuantityOnly()
@@ -41,18 +51,5 @@ class CartTest extends TestCase
         $cart = new Cart();
         $cart->addItem($product, 50)->addItem($product2, 50)->removeItem($product);
         $this->assertNotContains($cart->getItems(), [$product]);
-    }
-
-    /*public function testIt()
-    {
-        $product = $this->buildProduct(1, 'test', 1899);
-        $cart = new Cart();
-        $cart->addItem($product);
-        var_dump($cart->getCart() + $cart->getCart());
-    }*/
-
-    private function buildProduct($id, string $name, int $unitPrice)
-    {
-        return (new Product())->setId($id)->setName($name)->setUnitPrice($unitPrice);
     }
 }
