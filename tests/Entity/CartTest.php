@@ -1,7 +1,7 @@
 <?php
 
 
-namespace DealerGroup\Tests\Cart;
+namespace DealerGroup\Tests\Entity;
 
 use DealerGroup\Entity\Cart;
 use DealerGroup\Entity\Product;
