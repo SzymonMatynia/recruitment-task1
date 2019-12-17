@@ -1,7 +1,7 @@
 <?php
+declare(strict_types=1);
 
-
-namespace DealerGroup\Entity\Exception;
+namespace DealerGroup\Model\Exception;
 
 class InvalidMinimumQuantityException extends \LogicException
 {

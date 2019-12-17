@@ -1,10 +1,11 @@
 <?php
+declare(strict_types=1);
 
+namespace DealerGroup\Model;
 
-namespace DealerGroup\Entity;
-
-use DealerGroup\Entity\Exception\InvalidMinimumQuantityException;
-use DealerGroup\Entity\Exception\InvalidUnitPriceException;
+use DealerGroup\Model\Exception\InvalidMinimumQuantityException;
+use DealerGroup\Model\Exception\InvalidUnitPriceException;
+use Exception;
 
 class Product
 {
@@ -14,9 +15,9 @@ class Product
     private $minimumQuantity = 1;
 
     /**
-     * @return mixed
+     * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -32,9 +33,9 @@ class Product
     }
 
     /**
-     * @return mixed
+     * @return string
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -79,7 +80,7 @@ class Product
     /**
      * @param int $minimumQuantity
      * @return Product
-     * @throws \Exception
+     * @throws Exception
      */
     public function setMinimumQuantity(int $minimumQuantity): Product
     {
@@ -90,7 +91,7 @@ class Product
 
     /**
      * @param $minimumQuantity
-     * @throws \Exception
+     * @throws InvalidMinimumQuantityException
      */
     private function checkIfProperMinimumQuantitySupplied($minimumQuantity): void
     {
@@ -101,6 +102,7 @@ class Product
 
     /**
      * @param int $unitPrice
+     * @throws InvalidUnitPriceException
      */
     private function checkIfProperUnitPriceSupplied(int $unitPrice): void
     {

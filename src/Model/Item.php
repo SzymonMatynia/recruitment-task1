@@ -1,9 +1,10 @@
 <?php
+declare(strict_types=1);
 
+namespace DealerGroup\Model;
 
-namespace DealerGroup\Entity;
-
-use DealerGroup\Entity\Exception\InvalidItemQuantityException;
+use DealerGroup\Model\Exception\InvalidItemQuantityException;
+use Exception;
 
 class Item
 {
@@ -12,9 +13,9 @@ class Item
 
     /**
      * Item constructor.
-     * @param \DealerGroup\Entity\Product $product
+     * @param Product $product
      * @param int $quantity
-     * @throws \Exception
+     * @throws Exception
      */
     public function __construct(Product $product, int $quantity)
     {
@@ -25,9 +26,9 @@ class Item
     /**
      * @param $requestedQuantity
      * @return $this
-     * @throws \Exception
+     * @throws Exception
      */
-    public function changeItemQuantity($requestedQuantity)
+    public function changeItemQuantity($requestedQuantity): self
     {
         $this->checkIfQuantityIsProper($requestedQuantity);
         $this->quantity = $requestedQuantity;
@@ -37,7 +38,7 @@ class Item
     /**
      * @return int
      */
-    public function getQuantity()
+    public function getQuantity(): int
     {
         return $this->quantity;
     }
@@ -45,9 +46,9 @@ class Item
     /**
      * @param $quantity
      * @return $this
-     * @throws \Exception
+     * @throws InvalidItemQuantityException
      */
-    public function setQuantity($quantity)
+    public function setQuantity(int $quantity): self
     {
         $this->checkIfQuantityIsProper($quantity);
         $this->quantity = $quantity;
@@ -55,17 +56,18 @@ class Item
     }
 
     /**
-     * @return \DealerGroup\Entity\Product
+     * @return Product
      */
-    public function getProduct()
+    public function getProduct(): Product
     {
         return $this->product;
     }
 
     /**
      * @param int $quantity
+     * @throws InvalidItemQuantityException
      */
-    private function checkIfQuantityIsProper(int $quantity)
+    private function checkIfQuantityIsProper(int $quantity): void
     {
         if ($quantity < $this->product->getMinimumQuantity()) {
             throw new InvalidItemQuantityException('Minimum quantity is ' . $this->product->getMinimumQuantity());

@@ -1,11 +1,11 @@
 <?php
+declare(strict_types=1);
 
+namespace DealerGroup\Tests\Model;
 
-namespace DealerGroup\Tests\Entity;
-
-use DealerGroup\Entity\Exception\InvalidMinimumQuantityException;
-use DealerGroup\Entity\Exception\InvalidUnitPriceException;
-use DealerGroup\Entity\Product;
+use DealerGroup\Model\Exception\InvalidMinimumQuantityException;
+use DealerGroup\Model\Exception\InvalidUnitPriceException;
+use DealerGroup\Model\Product;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
